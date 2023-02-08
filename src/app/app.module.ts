@@ -4,9 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
 @NgModule({ //declaracion de componentes, directivas, pipes ...
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [ //solo se importan modulos
     BrowserModule,
