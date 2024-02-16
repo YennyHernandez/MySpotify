@@ -4,7 +4,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component'; //se 
 
 const routes: Routes = [   //"el hijo tiene hijos" para navegar sin destruir componentes
 {
-  path: "Tracks",
+  path: "tracks",
   loadChildren:() => import('@modules/tracks/tracks.module').then(m => m.TracksModule)
 },
 {
@@ -12,7 +12,7 @@ const routes: Routes = [   //"el hijo tiene hijos" para navegar sin destruir com
   loadChildren:() => import('@modules/favorites/favorites.module').then(m => m.FavoritesModule)
 },
 {
-  path: "History",
+  path: "history",
   loadChildren:() => import('@modules/history/history.module').then(m => m.HistoryModule)
 }
 ];

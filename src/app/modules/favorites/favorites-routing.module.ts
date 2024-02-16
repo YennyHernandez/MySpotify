@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path:"",  //sin el alias porque se especifica en el homeRoutingmodules y se carga en el local host
     component: FavoritesPageComponent,
-    outlet: "Child"
+    
   }
 ];
 
