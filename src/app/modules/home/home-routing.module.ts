@@ -14,7 +14,12 @@ const routes: Routes = [   //"el hijo tiene hijos" para navegar sin destruir com
 {
   path: "history",
   loadChildren:() => import('@modules/history/history.module').then(m => m.HistoryModule)
-}
+},
+{
+  path: "**", //TODO: si no existe ruta redirecciona a tracks
+  redirectTo: 'tracks'
+},
+
 ];
 
 @NgModule({
