@@ -18,6 +18,7 @@ const routes: Routes = [   //"el hijo tiene hijos" para navegar sin destruir com
 {
   path: "**", //TODO: si no existe ruta redirecciona a tracks
   redirectTo: 'tracks'
+  
 },
 
 ];

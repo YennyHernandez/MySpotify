@@ -43,7 +43,7 @@ export class LoginPageComponent implements OnInit {
         console.log('Session iniciada correcta', responseOk);
         const { tokenSession, data } = responseOk
         this.cookie.set('token', tokenSession, 4, '/') //TODO:📌📌📌📌
-        /*this.router.navigate(['/', 'tracks']) */
+        this.router.navigate(['/', 'tracks']) 
       },
         err => {//TODO error 400>=
           this.errorSession = true
