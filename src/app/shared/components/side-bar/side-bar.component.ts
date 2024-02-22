@@ -19,9 +19,14 @@ export class SideBarComponent implements OnInit {
   ngOnInit(): void {
     this.mainMenu.defaultOptions = [
       {
-        name: 'Home',
+        name: 'Auth',
         icon: 'uil uil-estate',
         router: ['/','auth']
+      },
+      {
+        name: 'Home',
+        icon: 'uil uil-estate',
+        router: ['/','tracks']
       },
       {
         name: 'Buscar',
@@ -29,10 +34,10 @@ export class SideBarComponent implements OnInit {
         router: ['/', 'history']
       },
       {
-        name: 'Tu biblioteca',
+        name: 'Canciones que te gustan',
         icon: 'uil uil-chart',
         router: ['/', 'Favorites'],
-        query: { hola: 'mundo' }
+        query: { hola: 'corazon' }
       }
     ]
 
@@ -42,9 +47,10 @@ export class SideBarComponent implements OnInit {
         icon: 'uil-plus-square'
       },
       {
-        name: 'Canciones que te gustan',
+        name: 'Tu biblioteca',
         icon: 'uil-heart-medical'
       }
+      
     ]
 
     this.customOptions = [
