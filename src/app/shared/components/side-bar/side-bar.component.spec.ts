@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed} from '@angular/core/testing';
-
+import { RouterModule } from '@angular/router';
 import { SideBarComponent } from './side-bar.component';
 
 describe('SideBarComponent', () => {
@@ -8,7 +8,8 @@ describe('SideBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SideBarComponent ]
+      declarations: [ SideBarComponent ],
+      imports: [ RouterModule.forRoot([]) ] // Importa RouterModule y utiliza .forRoot([])
     })
     .compileComponents();
 

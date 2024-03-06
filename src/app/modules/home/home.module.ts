@@ -6,6 +6,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SharedModule } from '@shared/shared.module';
 import { TracksModule } from '@modules/tracks/tracks.module';
 import { FavoritesModule } from '@modules/favorites/favorites.module';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 
 @NgModule({
@@ -16,7 +17,6 @@ import { FavoritesModule } from '@modules/favorites/favorites.module';
     CommonModule,
     HomeRoutingModule,
     SharedModule, 
-    TracksModule
-  ]
+    TracksModule,RouterOutlet]
 })
 export class HomeModule { }
