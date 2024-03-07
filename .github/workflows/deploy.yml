@@ -16,13 +16,15 @@ jobs:
     - name: Instalar dependencias
       run: 
         npm install --force
-        
+
     - name: Construir la aplicación
+      working-directory: ./MySpotify
       run: 
-        npm run build  
+        npm run build
+
 
     - name: Desplegar en GitHub Pages
-      uses: YennyHernandez/github-pages-deploy-action@v4
+      uses: JamesIves/github-pages-deploy-action@4.1.1
       with:
-        BRANCH: main  
-        FOLDER: dist
+        BRANCH: main
+        FOLDER: MySpotify/dist/my-spotify
