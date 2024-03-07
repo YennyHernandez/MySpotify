@@ -14,15 +14,15 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Instalar dependencias
-      run: |
+      run: 
         npm install --force
-
+        
     - name: Construir la aplicación
-      run: |
+      run: 
         npm run build  
 
     - name: Desplegar en GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4
+      uses: YennyHernandez/github-pages-deploy-action@v4
       with:
         BRANCH: main  
         FOLDER: dist
