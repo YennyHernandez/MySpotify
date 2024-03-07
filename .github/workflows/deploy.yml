@@ -15,7 +15,7 @@ jobs:
 
     - name: Instalar dependencias
       run: |
-        npm install  
+        npm install --force
 
     - name: Construir la aplicación
       run: |
@@ -24,5 +24,5 @@ jobs:
     - name: Desplegar en GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        BRANCH: gh-pages  
+        BRANCH: main  
         FOLDER: dist
