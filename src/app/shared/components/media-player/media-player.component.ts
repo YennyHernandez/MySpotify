@@ -26,7 +26,11 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     console.log('🔴🔴🔴🔴🔴🔴🔴 BOOM!');
   }
 
-
+   sendfavorites(): void{
+    console.log("agregando propiedad favorito")
+    this.multimediaService.favoritesButton$.next(true)
+    
+  } 
   handlePosition(event: MouseEvent): void {
     const elNative: HTMLElement = this.progressBar.nativeElement
     const { clientX } = event

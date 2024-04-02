@@ -46,9 +46,9 @@ export class LoginPageComponent implements OnInit {
         this.router.navigate(['/', 'tracks']) 
       },
         err => {//TODO error 400>=
-          this.errorSession = true
+          this.errorSession = true 
           console.log('⚠⚠⚠⚠Ocurrio error con tu email o password', this.errorSession);
-          this.router.navigate(['/', 'favorites']) 
+          
         }) 
 
   }
