@@ -5,7 +5,7 @@
     --color-3: #000000;
     --color-4: #FFFFFF;
     --color-5: #181818;
-    --font-size-1: 1rem;
+    --font-size-1: 0.9rem;
     --font-size-2: 1.2rem;
     --font-size-3: 1.8rem;
     --shadow-1: rgb(0 0 0 / 35%) 0px 8px 24px;
@@ -30,12 +30,19 @@ input,
 button {
     cursor: pointer;
     font-family: var(--font-family-1);
+    border-radius: 50%;
+    
 }
 
 button:disabled {
     opacity: .5;
 }
 .liked {
-    color: red; 
-    fill: red;
+    color: #FFFFFF; 
+    background-color: red;
+    
+}
+.track-like{
+    display: flex;
+    align-items: center;
 }

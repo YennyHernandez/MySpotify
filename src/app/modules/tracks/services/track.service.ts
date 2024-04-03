@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 export class TrackService {
   private readonly URL = environment.api
   public tracksSubject: BehaviorSubject<TrackModel[]> = new BehaviorSubject<TrackModel[]>([]);
+  public tracksFilterSubject: BehaviorSubject<TrackModel[]> = new BehaviorSubject<TrackModel[]>([]);
   private tracksLoaded = false;
   constructor(private http: HttpClient) {
     this.loadData();
@@ -53,7 +54,7 @@ export class TrackService {
       )
   } */
 
-  addFavorite(track: TrackModel): void {
+  addFavorite(track: TrackModel) {
     const tracks = this.tracksSubject.getValue(); // Obtiene los tracks actuales del BehaviorSubject
     const updatedTracks = tracks.map(t => {
       if (t._id === track._id){
@@ -65,10 +66,16 @@ export class TrackService {
       }
       return t; // Mantener la pista sin cambios si no es la pista deseada
     });
-    this.tracksSubject.next(updatedTracks); // Actualiza el BehaviorSubject con los tracks actualizados
+    this.tracksSubject.next(updatedTracks); // Actualiza el BehaviorSubject con los tracks actualizados state favoritos
     console.log("los favoritos añadidos son", this.tracksSubject)
+    this.filterFavoritos();
   }
 
+  filterFavoritos(){
+    const tracks = this.tracksSubject.getValue();
+    let tracksmap = tracks.filter(track => track.statefavorite === true)
+      this.tracksFilterSubject.next(tracksmap);
+  }
   /**
    * 
    * @returns Devolver canciones random

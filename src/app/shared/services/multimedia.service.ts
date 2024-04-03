@@ -17,11 +17,9 @@ export class MultimediaService {
   public playerStatus$: BehaviorSubject<string> = new BehaviorSubject('paused')
   public playerPercentage$: BehaviorSubject<number> = new BehaviorSubject(0)
   public tracks: TrackModel[] = [];
-  public favoritesButton$: BehaviorSubject<boolean> = new BehaviorSubject(false)
   tracksSubject  = new BehaviorSubject<TrackModel[]>([]);
   constructor() {
     this.tracksSubject.next([]);
-    console.log("😂")
     this.audio = new Audio()
     this.trackInfo$.subscribe(responseOK => {  TODO:// cerrar suscripción
       if (responseOK) {
