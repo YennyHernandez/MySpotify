@@ -35,3 +35,7 @@ button {
 button:disabled {
     opacity: .5;
 }
+.liked {
+    color: red; 
+    fill: red;
+}

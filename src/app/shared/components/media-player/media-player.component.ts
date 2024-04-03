@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
+import { TrackService } from '@modules/tracks/services/track.service';
 import { MultimediaService } from '@shared/services/multimedia.service';
 import { Subscription } from 'rxjs'; //TODO: Programacion reactiva!
 
@@ -12,7 +13,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   @ViewChild('progressBar') progressBar: ElementRef = new ElementRef('')
   listObservers$: Array<Subscription> = []
   state: string = 'paused'
-  constructor(public multimediaService: MultimediaService) { }
+  constructor(public multimediaService: MultimediaService, public TrackService : TrackService) { }
 
   ngOnInit(): void {
 
@@ -26,10 +27,9 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     console.log('🔴🔴🔴🔴🔴🔴🔴 BOOM!');
   }
 
-   sendfavorites(): void{
-    console.log("agregando propiedad favorito")
-    this.multimediaService.favoritesButton$.next(true)
-    
+   sendfavorites(mockCover : TrackModel): void{
+    this.TrackService.addFavorite(mockCover); 
+    console.log("agregando propiedad favorito", mockCover._id)    
   } 
   handlePosition(event: MouseEvent): void {
     const elNative: HTMLElement = this.progressBar.nativeElement

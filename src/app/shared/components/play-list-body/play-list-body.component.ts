@@ -13,11 +13,12 @@ import { TracksModule } from '@modules/tracks/tracks.module';
 export class PlayListBodyComponent implements OnInit {
   @Input() tracks: Array<TrackModel> = []
   optionSort: { property: string | null, order: string } = { property: null, order: 'asc' }
-  constructor(public MultimediaService: MultimediaService) { }
+  constructor(public TrackService: TrackService) { }
 
   ngOnInit(): void {
-    this.MultimediaService.tracksSubject.subscribe(tracks => {
-      this.tracks = tracks;
+    this.TrackService.tracksSubject.subscribe(tracks => {
+      let tracksmap = tracks.filter(track => track.statefavorite === true)
+      this.tracks = tracksmap;
     }); 
   }
   changeSort(property: string): void {

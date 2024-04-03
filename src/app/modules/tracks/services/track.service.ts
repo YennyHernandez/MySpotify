@@ -1,7 +1,7 @@
 import { TrackModel } from '@core/models/tracks.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, mergeMap, tap, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -9,9 +9,10 @@ import { environment } from 'src/environments/environment';
 })
 export class TrackService {
   private readonly URL = environment.api
-
+  public tracksSubject: BehaviorSubject<TrackModel[]> = new BehaviorSubject<TrackModel[]>([]);
+  private tracksLoaded = false;
   constructor(private http: HttpClient) {
-
+    this.loadData();
   }
 
   /**
@@ -31,15 +32,42 @@ export class TrackService {
    * 
    * @returns 
    */
-  getAllTracks$(): Observable<any> {
+   private loadData(): void {
+    if (!this.tracksLoaded) {
+      this.http.get(`${this.URL}/tracks`).pipe(
+        map((response: any) => response.data),
+        tap((data: TrackModel[]) => {
+          this.tracksSubject.next(data);
+          this.tracksLoaded = true;
+        })
+      ).subscribe();
+    }
+  }
+  /* getAllTracks$(): Observable<any> {
     return this.http.get(`${this.URL}/tracks`)
       .pipe(
         map(({ data }: any) => {
+          this.tracksSubject.next(data);
           return data
         })
       )
-  }
+  } */
 
+  addFavorite(track: TrackModel): void {
+    const tracks = this.tracksSubject.getValue(); // Obtiene los tracks actuales del BehaviorSubject
+    const updatedTracks = tracks.map(t => {
+      if (t._id === track._id){
+        if (t.statefavorite === true ){
+          return { ...t, statefavorite: false }
+        } else {
+          return { ...t, statefavorite: true }
+        }
+      }
+      return t; // Mantener la pista sin cambios si no es la pista deseada
+    });
+    this.tracksSubject.next(updatedTracks); // Actualiza el BehaviorSubject con los tracks actualizados
+    console.log("los favoritos añadidos son", this.tracksSubject)
+  }
 
   /**
    * 
