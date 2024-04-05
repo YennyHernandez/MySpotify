@@ -13,16 +13,12 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   @ViewChild('progressBar') progressBar: ElementRef = new ElementRef('')
   listObservers$: Array<Subscription> = []
   state: string = 'paused'
-  isLiked: boolean = false;
   constructor(public multimediaService: MultimediaService, public TrackService : TrackService) { }
 
   ngOnInit(): void {
 
     const observer1$ = this.multimediaService.playerStatus$.subscribe(status => this.state = status)
-    const statefavoritos$ = this.multimediaService.trackInfo$.subscribe(status => this.isLiked = status.statefavorite)
-      this.listObservers$ = [observer1$,statefavoritos$]
-      
-
+    this.listObservers$ = [observer1$]
   }
 
    ngOnDestroy(): void {
@@ -32,9 +28,9 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
 
   sendfavorites(mockCover : TrackModel): void{
     this.TrackService.addFavorite(mockCover);
-    this.isLiked = !this.isLiked
     console.log("agregando propiedad favorito a ID", mockCover._id)    
   } 
+  
   handlePosition(event: MouseEvent): void {
     const elNative: HTMLElement = this.progressBar.nativeElement
     const { clientX } = event

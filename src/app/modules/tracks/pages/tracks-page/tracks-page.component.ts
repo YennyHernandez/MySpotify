@@ -24,7 +24,7 @@ export class TracksPageComponent implements OnInit, OnDestroy {
   async loadDataAll(): Promise<any> {
     // let trackservi= await this.trackService.getAllTracks$().toPromise()
      this.trackService.tracksSubject.subscribe(response =>{
-     this.tracksTrending = response
+      this.tracksTrending = response
      })
      
 

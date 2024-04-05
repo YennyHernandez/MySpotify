@@ -26,7 +26,7 @@
             <h5 class="track-title sub-title">{{mockCover?.album}}</h5>
         </div>
         <div class="track-like">
-            <button (click)="sendfavorites(mockCover)" [ngClass]="{ 'liked': isLiked === true}" >
+            <button (click)="sendfavorites(mockCover)" class="like-btn" [class.liked]="mockCover.statefavorite" >
                 <i class="uil uil-heart"></i>
             </button>
         </div>

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, mergeMap, tap, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { MultimediaService } from '@shared/services/multimedia.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +13,8 @@ export class TrackService {
   public tracksSubject: BehaviorSubject<TrackModel[]> = new BehaviorSubject<TrackModel[]>([]);
   public tracksFilterSubject: BehaviorSubject<TrackModel[]> = new BehaviorSubject<TrackModel[]>([]);
   private tracksLoaded = false;
-  constructor(private http: HttpClient) {
+ public statusFavoriteActual$:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)  //TODO: ver si es necesario 
+  constructor(private http: HttpClient, private multimediaService : MultimediaService) {
     this.loadData();
   }
 
@@ -27,7 +29,6 @@ export class TrackService {
       resolve(listTmp)
     })
   }
-
   /**
    * //TODO {data:[..1,...2,..2]}  como viene
    * 
@@ -36,7 +37,7 @@ export class TrackService {
    private loadData(): void {
     if (!this.tracksLoaded) {
       this.http.get(`${this.URL}/tracks`).pipe(
-        map((response: any) => response.data),
+        map((response: any) => (response.data as TrackModel[]).map(track =>({...track, statefavorite: false}))),
         tap((data: TrackModel[]) => {
           this.tracksSubject.next(data);
           this.tracksLoaded = true;
@@ -58,16 +59,14 @@ export class TrackService {
     const tracks = this.tracksSubject.getValue(); // Obtiene los tracks actuales del BehaviorSubject
     const updatedTracks = tracks.map(t => {
       if (t._id === track._id){
-        if (t.statefavorite === true ){
-          return { ...t, statefavorite: false }
-        } else {
-          return { ...t, statefavorite: true }
-        }
+        const updateTrack: TrackModel = {...t, statefavorite :!t.statefavorite };
+        this.multimediaService.trackInfo$.next(updateTrack);
+        return updateTrack
       }
       return t; // Mantener la pista sin cambios si no es la pista deseada
     });
     this.tracksSubject.next(updatedTracks); // Actualiza el BehaviorSubject con los tracks actualizados state favoritos
-    console.log("los favoritos añadidos son", this.tracksSubject)
+    console.log("los favoritos añadidos son", this.tracksSubject.value)
     this.filterFavoritos();
   }
 

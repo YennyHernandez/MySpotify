@@ -30,7 +30,7 @@ input,
 button {
     cursor: pointer;
     font-family: var(--font-family-1);
-    border-radius: 50%;
+    
     
 }
 
@@ -46,3 +46,12 @@ button:disabled {
     display: flex;
     align-items: center;
 }
+.like-btn{
+    border-radius: 50%;
+}
+
+/* width: 500px;
+font-size: 50px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis; */

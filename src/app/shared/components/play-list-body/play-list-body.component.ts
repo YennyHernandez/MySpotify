@@ -14,12 +14,14 @@ export class PlayListBodyComponent implements OnInit {
   @Input() tracks: Array<TrackModel> = []
   contFavorites: number = 0;
   optionSort: { property: string | null, order: string } = { property: null, order: 'asc' }
+  isLiked: boolean = true;
   constructor(public TrackService: TrackService) { }
 
   ngOnInit(): void {
     this.TrackService.tracksFilterSubject.subscribe(tracks => {
       this.tracks = tracks;
     }); 
+    console.log(this.isLiked, "👍👍👍👍👍❤️")
   }
   changeSort(property: string): void {
     const { order } = this.optionSort
@@ -30,5 +32,10 @@ export class PlayListBodyComponent implements OnInit {
     console.log(this.optionSort)
     console.log("tracks eso 🌱",this.tracks)
   }
+  sendfavorites(mockCover : TrackModel): void{
+    this.TrackService.addFavorite(mockCover);
+    this.isLiked = !this.isLiked
+    console.log("quitando favorito a ID", mockCover._id)    
+  } 
 
 }

@@ -10,21 +10,18 @@ import { BehaviorSubject, Observable, Observer, Subject } from 'rxjs';
 export class MultimediaService {
   callback: EventEmitter<any> = new EventEmitter<any>()
 
-  public trackInfo$: BehaviorSubject<any> = new BehaviorSubject(null)
+  public trackInfo$: BehaviorSubject<TrackModel| null> = new BehaviorSubject<TrackModel | null>(null)
   public audio!: HTMLAudioElement //TODO <audio>
   public timeElapsed$: BehaviorSubject<string> = new BehaviorSubject('00:00')
   public timeRemaining$: BehaviorSubject<string> = new BehaviorSubject('-00:00')
   public playerStatus$: BehaviorSubject<string> = new BehaviorSubject('paused')
   public playerPercentage$: BehaviorSubject<number> = new BehaviorSubject(0)
   public tracks: TrackModel[] = [];
-  tracksSubject  = new BehaviorSubject<TrackModel[]>([]);
   constructor() {
-    this.tracksSubject.next([]);
     this.audio = new Audio()
     this.trackInfo$.subscribe(responseOK => {  TODO:// cerrar suscripción
       if (responseOK) {
         this.tracks.push(responseOK);
-        this.tracksSubject.next(this.tracks);
         console.log(responseOK, "respose")
         this.setAudio(responseOK)
       }
@@ -99,7 +96,7 @@ export class MultimediaService {
   } 
 
 
-  //TODO: Funciones publicas
+  //TODO: Funciones publicas|
 
   public setAudio(track: TrackModel): void {    
     this.audio.src = track.url

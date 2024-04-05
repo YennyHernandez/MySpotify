@@ -33,6 +33,11 @@
         <div class="cover-info">
             <div class="name-track">{{track.name}}</div>
             <div class="name-track-details">{{track.artist.name}}</div>
+            <div class="track-like">
+                <button (click)="sendfavorites(track)" class="liked like-btn" >
+                    <i class="uil uil-heart"></i>
+                </button>
+            </div>
         </div>
     </div>
 
