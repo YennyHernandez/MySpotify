@@ -29,15 +29,16 @@
 <ng-template #coverSection let-track="track">
 
     <div class="cover-section">
+        <div class="track-like">
+            <button (click)="sendfavorites(track)" class="liked like-btn" >
+                <i class="uil uil-heart"></i>
+            </button>
+        </div>
         <img appImgBroken class="cover-track" [src]="track.cover" [alt]="track.name">
         <div class="cover-info">
-            <div class="name-track">{{track.name}}</div>
-            <div class="name-track-details">{{track.artist.name}}</div>
-            <div class="track-like">
-                <button (click)="sendfavorites(track)" class="liked like-btn" >
-                    <i class="uil uil-heart"></i>
-                </button>
-            </div>
+            <div class="name-track">{{track.name}}
+                <div class="name-track-details">{{track.artist.name}}</div>
+            </div>           
         </div>
     </div>
 

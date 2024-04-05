@@ -10,6 +10,7 @@ import { MultimediaService } from '@shared/services/multimedia.service';
 export class CardPlayerComponent implements OnInit {
   @Input() mode: 'small' | 'big' = 'small'
   @Input() track: TrackModel = { _id: 0, name: '', album: '', url: '', cover: '' };
+  flag = false;
 
   constructor(private multimediaService: MultimediaService) { }
 
@@ -17,8 +18,10 @@ export class CardPlayerComponent implements OnInit {
   }
  //TODO: pasar como metodo al servicio
   sendPlay(track: TrackModel): void{
-    console.log("enviando cancion next al servicio", track)
+    this.flag = true;
+    console.log("enviando cancion next al servicio", track, this.flag)
     this.multimediaService.trackInfo$.next(track)
+    this.multimediaService.flagPlay$.next(this.flag)
     
   }
 

@@ -13,6 +13,7 @@ export class TrackService {
   public tracksSubject: BehaviorSubject<TrackModel[]> = new BehaviorSubject<TrackModel[]>([]);
   public tracksFilterSubject: BehaviorSubject<TrackModel[]> = new BehaviorSubject<TrackModel[]>([]);
   private tracksLoaded = false;
+  flag = false;
  public statusFavoriteActual$:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)  //TODO: ver si es necesario 
   constructor(private http: HttpClient, private multimediaService : MultimediaService) {
     this.loadData();
@@ -60,7 +61,10 @@ export class TrackService {
     const updatedTracks = tracks.map(t => {
       if (t._id === track._id){
         const updateTrack: TrackModel = {...t, statefavorite :!t.statefavorite };
-        this.multimediaService.trackInfo$.next(updateTrack);
+        const trackPlayed = this.multimediaService.trackInfo$.getValue();
+        if(trackPlayed?._id === track._id){
+          this.multimediaService.trackInfo$.next(updateTrack); // Actualiza la canción en reproducción
+        }
         return updateTrack
       }
       return t; // Mantener la pista sin cambios si no es la pista deseada
