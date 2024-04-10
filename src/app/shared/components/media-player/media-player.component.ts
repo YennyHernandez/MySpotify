@@ -43,4 +43,18 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   } 
 
 
+  sendNextPlay(position: number) {
+    const idtrackactualget = this.multimediaService.trackInfo$.getValue();
+    if (idtrackactualget && idtrackactualget._id) {
+        const idtrackactual = Number(idtrackactualget._id) + position;
+        const alltracks = this.TrackService.tracksSubject.getValue();
+        const tracktoplay = alltracks.find(track => track._id === idtrackactual);
+        if (tracktoplay) {
+            this.multimediaService.trackInfo$.next(tracktoplay);
+            this.multimediaService.flagPlay$.next(true)
+        }
+      }
+    } 
+ 
+
 }

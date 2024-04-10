@@ -1,9 +1,6 @@
 import { TrackModel } from './../../core/models/tracks.model';
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Observer, Subject } from 'rxjs';
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -58,7 +55,6 @@ export class MultimediaService {
     this.audio.addEventListener('ended', this.setPlayerStatus, false)
 
   }
-
   private setPlayerStatus = (state: any) => {
     switch (state.type) { //TODO: --> playing
       case 'play':
@@ -117,6 +113,7 @@ export class MultimediaService {
   //TODO: Funciones publicas|
 
   public setAudio(track: TrackModel): void { 
+    console.log("no entraaa a pausar")
     if (!this.audio.paused) { //pausa antes de reproducir un nuevo track
       this.audio.pause();
       this.audio.currentTime = 0; // Reiniciar la reproducción al principio

@@ -36,7 +36,7 @@
 <ng-template #playerZone>
     <div class="player-controls-inside">
         <div class="buttons-media">
-            <button class="arrow btn">
+            <button (click)="sendNextPlay(-1)" class="arrow btn">
                 <i class="uil uil-previous"></i>
             </button>
             <button (click)="multimediaService.togglePlayer()" class="play btn">
@@ -46,7 +46,7 @@
                 }" class="uil "></i>
 
             </button>
-            <button class="arrow btn">
+            <button (click)="sendNextPlay(1)" class="arrow btn">
                 <i class="uil uil-step-forward"></i>
             </button>
         </div>
