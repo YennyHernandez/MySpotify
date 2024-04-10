@@ -17,19 +17,28 @@ export class MultimediaService {
   public timeRemaining$: BehaviorSubject<string> = new BehaviorSubject('-00:00')
   public playerStatus$: BehaviorSubject<string> = new BehaviorSubject('paused')
   public playerPercentage$: BehaviorSubject<number> = new BehaviorSubject(0)
-  public tracksHistory: TrackModel[] = [];
+  //public tracksHistory: TrackModel[] = [];
+  public trackHistory$: BehaviorSubject<TrackModel[]> = new BehaviorSubject<TrackModel[]>([]);
+
   flag = false
   constructor() {
     this.audio = new Audio()
     
     this.trackInfo$.subscribe(responseOK => {  TODO:// cerrar suscripción
       if (responseOK) {
-        this.tracksHistory.push(responseOK);
+        const currentTrackHistory = this.trackHistory$.getValue();
+        const isTrackExist = currentTrackHistory.some(t => t._id === responseOK._id); // Verifica si el track ya está en trackHistory$
+        if (!isTrackExist) { // Si el track no existe, crea un nuevo array con el nuevo track y emite el nuevo valor 
+          const updatedTrackHistory = [...currentTrackHistory, responseOK];
+          this.trackHistory$.next(updatedTrackHistory);
+        }
         this.flagPlay$.subscribe(flag =>{
           if(flag){
             this.setAudio(responseOK)
             this.flagPlay$.next(!flag)
-          } 
+          }
+        return this.trackHistory$ 
+        
         }) 
 
         
@@ -107,10 +116,16 @@ export class MultimediaService {
 
   //TODO: Funciones publicas|
 
-  public setAudio(track: TrackModel): void {    
+  public setAudio(track: TrackModel): void { 
+    if (!this.audio.paused) { //pausa antes de reproducir un nuevo track
+      this.audio.pause();
+      this.audio.currentTime = 0; // Reiniciar la reproducción al principio
+  }  
     this.audio.src = track.url
     console.log('🐱‍🏍reproduciendo audioo', this.audio.src);
-    this.audio.play()
+    this.audio.addEventListener('canplaythrough', () => {
+      this.audio.play();
+  });
   }
 
    public togglePlayer(): void {

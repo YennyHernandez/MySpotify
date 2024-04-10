@@ -53,6 +53,27 @@ button:disabled {
     display: flex;
     gap: 10px
 }
+.history-page {
+    display: flex;
+     
+}
+h1{
+    margin-left: 20px;
+}
+.history-section{
+    background-color: #323232;
+}
+.buttons-player-hy{
+    margin-top: 89px;
+    border-radius: 50%;
+    background-color: #1DB954;
+    color: #FFFFFF;
+   
+}
+
+.section-shared{
+    margin-top: 10px;
+}
 
 /* width: 500px;
 font-size: 50px;

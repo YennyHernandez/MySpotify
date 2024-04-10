@@ -69,6 +69,14 @@ export class TrackService {
       }
       return t; // Mantener la pista sin cambios si no es la pista deseada
     });
+    const trackHistoryGet = this.multimediaService.trackHistory$.getValue();
+    const updatedTrackHistory = trackHistoryGet.map(t => {
+      if (t._id === track._id) {
+        return {...t, statefavorite: !t.statefavorite }; //actualiza el array del historial
+      }
+      return t;
+    });
+    this.multimediaService.trackHistory$.next(updatedTrackHistory);
     this.tracksSubject.next(updatedTracks); // Actualiza el BehaviorSubject con los tracks actualizados state favoritos
     console.log("los favoritos añadidos son", this.tracksSubject.value)
     this.filterFavoritos();

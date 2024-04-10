@@ -1,5 +1,24 @@
 
 <div class="history-page">
-    <app-search (callbackData)="receiveData($event)"></app-search>
-    <app-play-list-body [tracks]="listResults$ | async" ></app-play-list-body>
+    <div>
+        <h2 class="title">¡Busca tu canción!🔎</h2>
+        <app-search (callbackData)="receiveData($event)"></app-search>       
+    </div>
+    <div>
+        <button (click)="sendPlay()" *ngIf="flagbtnplay" class="buttons-player-hy">
+            <i class="uil " [ngClass]="{'uil-play':true}"></i>
+        </button>
+    </div>
+    <div class="section-shared">
+        <app-play-list-body [tracks]="listResults$ | async" [showHeart]="false"></app-play-list-body>
+    </div> 
+    
+</div>
+<hr>
+<div class="history-section">
+    <div>
+        <h1 class="title">Tu Historial de reproducciones⏰</h1>    
+        <app-play-list-body [tracks]="tracksHistory" ></app-play-list-body>
+    </div> 
+    
 </div>

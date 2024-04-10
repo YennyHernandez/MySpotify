@@ -41,7 +41,7 @@ export class SideBarComponent implements OnInit {
       }
     ]
 
-    this.mainMenu.accessLink = [
+   /*  this.mainMenu.accessLink = [
       {
         name: 'Crear lista',
         icon: 'uil-plus-square'
@@ -51,7 +51,7 @@ export class SideBarComponent implements OnInit {
         icon: 'uil-heart-medical'
       }
       
-    ]
+    ]*/
 
     this.customOptions = [
       {
@@ -72,7 +72,7 @@ export class SideBarComponent implements OnInit {
       }
     ]
 
-  }
+  } 
 
   goTo($event: any): void {
     this.router.navigate(['/', 'favorites'], {

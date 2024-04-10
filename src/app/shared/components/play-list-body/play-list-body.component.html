@@ -29,8 +29,8 @@
 <ng-template #coverSection let-track="track">
 
     <div class="cover-section">
-        <div class="track-like">
-            <button (click)="sendfavorites(track)" class="liked like-btn" >
+        <div  *ngIf="showHeart" class="track-like">
+            <button (click)="sendfavorites(track)" class="like-btn" [class.liked]="track.statefavorite" >
                 <i class="uil uil-heart"></i>
             </button>
         </div>

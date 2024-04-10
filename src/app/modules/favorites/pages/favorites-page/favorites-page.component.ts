@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
+import { TrackService } from '@modules/tracks/services/track.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-favorites-page',
   templateUrl: './favorites-page.component.html',
   styleUrls: ['./favorites-page.component.css']
 })
-export class FavoritesPageComponent {
-     tracks: TrackModel[] = [
+export class FavoritesPageComponent implements OnInit, OnDestroy {
+/*      tracks: TrackModel[] = [
     {
       _id: 1,
       name: 'Getting Over',
@@ -28,7 +30,22 @@ export class FavoritesPageComponent {
     },
    
   ];
-  
-
-
+   */
+  tracks: Array<TrackModel> = [];
+  observer1!: Subscription;
+  constructor(public TrackService: TrackService) { }
+  ngOnInit(): void {
+    if (this.tracks.length === 0){
+      this.observer1 = this.TrackService.tracksFilterSubject.subscribe(tracks => {
+        this.tracks = tracks;
+      }); 
+    }
+  }    
+  ngOnDestroy(): void {
+    this.observer1?.unsubscribe();
+  }
+    
 }
+
+
+
