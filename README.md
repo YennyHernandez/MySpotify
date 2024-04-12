@@ -1,27 +1,40 @@
-# MySpotify
+# Spotify Personalizado 🎶
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.2.
+Esta es una aplicación web personalizada de reproducción de música inspirada en Spotify. Permite a los usuarios reproducir música, agregar canciones a favoritos, buscar canciones y ver el historial de reproducción.
 
-## Development server
+## Acceso a la Aplicación 🛫
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Puedes acceder a la aplicación en el siguiente enlace: [https://mypersonalizedspotify.netlify.app](URL_DEPLOY)
 
-## Code scaffolding
+### Credenciales de Acceso 🔑
+- **Usuario:** [test@test.com]
+- **Contraseña:** [1234578]
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Características 👩‍💻
 
-## Build
+- Reproducción de música
+- Agregar canciones a favoritos
+- Búsqueda de canciones
+- Historial de canciones reproducidas
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Tecnologías Utilizadas ⚙️
 
-## Running unit tests
+La aplicación se ha desarrollado utilizando las siguientes tecnologías:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Angular
+- Carga Peresosa (Lazy Loading)
+- Outlet Template
+- Comunicación entre Componentes mediante:
+  - Inputs
+  - Servicios
+  - BehaviorSubject
 
-## Running end-to-end tests
+## Capturas de Pantalla 💻
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![image](https://github.com/YennyHernandez/MySpotify/assets/60351769/574317e8-f49b-458b-a8d6-a500b96d47b9)
+![image](https://github.com/YennyHernandez/MySpotify/assets/60351769/d73baad4-4ada-447f-88b8-a87d41dfa40b)
+![image](https://github.com/YennyHernandez/MySpotify/assets/60351769/ebdb1af7-aeb9-47ba-8fc3-8cbfdfb202de)
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+¡Disfruta explorando la aplicación!
